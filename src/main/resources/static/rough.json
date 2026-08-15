@@ -1,0 +1,46 @@
+{
+  "coord": {
+    "lon": -74.399,
+    "lat": 40.4993
+  },
+  "weather": [
+    {
+      "id": 804,
+      "main": "Clouds",
+      "description": "overcast clouds",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 24.58,
+    "feels_like": 25.18,
+    "temp_min": 22.81,
+    "temp_max": 26.51,
+    "pressure": 1014,
+    "humidity": 80,
+    "sea_level": 1014,
+    "grnd_level": 1010
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.08,
+    "deg": 16,
+    "gust": 5.74
+  },
+  "clouds": {
+    "all": 100
+  },
+  "dt": 1786672750,
+  "sys": {
+    "type": 2,
+    "id": 2002152,
+    "country": "US",
+    "sunrise": 1786615584,
+    "sunset": 1786665523
+  },
+  "timezone": -14400,
+  "id": 5102713,
+  "name": "Piscataway",
+  "cod": 200
+}
