@@ -1,0 +1,10 @@
+$kind: http-request
+name: Weather in my town
+description: ""
+url: localhost:8080/payments/Ani/Chennai
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 2250442774743592
