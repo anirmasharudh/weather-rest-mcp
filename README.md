@@ -1,8 +1,11 @@
 Welcome to my humble API! I have an endpoint that shows you the weather conditions in your town.
 ![This weather](./src/main/resources/static/IMG_1361.png)
 Coming soon: MCP tools and AI client functionality for knowing the weather.
-The following Readme has been generated using an AI tool. I have added some personal tidbits for help.
 
+UPDATE! MCP functionality is now live!
+![MCP weather example](./src/main/resources/static/Screenshot 2026-08-17 at 2.47.34\342\200\257PM.png)
+
+The following Readme has been generated using an AI tool. I have added some personal tidbits for help.
 ## Prerequisites
 Before you start, make sure you have:
 - **Java 25** (matches this project's toolchain)
