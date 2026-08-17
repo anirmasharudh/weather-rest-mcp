@@ -1,11 +1,9 @@
 Welcome to my humble API! I have an endpoint that shows you the weather conditions in your town.
+
 ![This weather](./src/main/resources/static/IMG_1361.png)
 
-Coming soon: MCP tools and AI client functionality for knowing the weather.
-
 UPDATE! MCP Tool functionality is now live! Look for the @McpTools annotated method.
-Example:
-
+Example screenshot:
 ![MCP weather example](./src/main/resources/static/MCP_Example.png)
 
 The following Readme has been generated using an AI tool. I have added some personal tidbits for help.
