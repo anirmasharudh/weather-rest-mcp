@@ -1,13 +1,15 @@
-## Welcome to my humble API! I have an endpoint that shows you the weather conditions in your town.
+## Welcome to my humble API! 
+**I have the provision to show you the weather conditions in your town.**
 
 ![This weather](./src/main/resources/static/IMG_1361.png)
 
-## MCP Tool functionality is now live! Look for the @McpTools annotated methods.
+## MCP Tool functionality is now live! 
+**Look for the @McpTools annotated methods.**
 
 **Example screenshots:**
 <p>
-  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example.png" height="600" alt="MCP_Example"/>
-  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" height="600" alt="MCP_Example_2"/>
+  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example.png" width=45% alt="MCP_Example"/>
+  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" width=45% alt="MCP_Example_2"/>
 </p>
 
 ## Prerequisites
