@@ -1,5 +1,5 @@
 ## Welcome to my humble API! 
-**I have the provision to show you the weather conditions in your town.**
+**I have a provision to show you the weather conditions in your town.**
 
 ![This weather](./src/main/resources/static/IMG_1361.png)
 
@@ -8,8 +8,7 @@
 
 **Example screenshots:**
 <p>
-  <img style="border:1px solid black;" align src="./src/main/resources/static/MCP_Example.png" align="center"  width=45% alt="MCP_Example"/>
-  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" align="center" width=45% alt="MCP_Example_2"/>
+  <img src="./src/main/resources/static/MCP_Example.png" alt="MCP_Example"/>
 </p>
 
 ## Prerequisites
