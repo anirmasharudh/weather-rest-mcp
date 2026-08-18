@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "payment")
 public class Payment {
     @Id
-    private String paymentId;
+    private Long paymentId;
 
     private String clientId;
     private BigDecimal amount;
