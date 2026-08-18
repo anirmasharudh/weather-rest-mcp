@@ -8,8 +8,8 @@
 
 **Example screenshots:**
 <p>
-  <img style="border:1px solid black;" align src="./src/main/resources/static/MCP_Example.png" align="center"  width=60% alt="MCP_Example"/>
-  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" align="center" width=40% alt="MCP_Example_2"/>
+  <img style="border:1px solid black;" align src="./src/main/resources/static/MCP_Example.png" align="center"  width=45% alt="MCP_Example"/>
+  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" align="center" width=45% alt="MCP_Example_2"/>
 </p>
 
 ## Prerequisites
