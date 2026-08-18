@@ -1,7 +1,5 @@
 HELP.md
 .gradle
-.postman/resources.yaml
-postman/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
