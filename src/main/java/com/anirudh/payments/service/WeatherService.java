@@ -1,6 +1,7 @@
 package com.anirudh.payments.service;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class WeatherService {
 
@@ -24,6 +26,7 @@ public class WeatherService {
     @McpTool(description = "Gets the current temperature in Celsius for a given city",
             annotations = @McpTool.McpAnnotations(readOnlyHint = true, destructiveHint = false, idempotentHint = true))
     public String getTemperature(@McpToolParam(description = "City name, e.g. 'London'") String city) {
+        log.info("Getting temperature for City {} from the MCP tool", city);
         WeatherResponse response = fetchWeatherResponse(city);
 
         if (response == null || response.main() == null) {
@@ -34,6 +37,7 @@ public class WeatherService {
 
     // Rest Endpoint
     public List<String> getCurrentWeather(String city) {
+        log.info("Getting weather conditions for City {} from the Rest endpoint", city);
         WeatherResponse response = fetchWeatherResponse(city);
 
         if (response == null || response.main() == null) {

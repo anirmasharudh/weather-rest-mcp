@@ -1,12 +1,15 @@
-Welcome to my humble API! I have an endpoint that shows you the weather conditions in your town.
+## Welcome to my humble API! I have an endpoint that shows you the weather conditions in your town.
 
 ![This weather](./src/main/resources/static/IMG_1361.png)
 
-UPDATE! MCP Tool functionality is now live! Look for the @McpTools annotated method.
-Example screenshot:
-![MCP weather example](./src/main/resources/static/MCP_Example.png)
+## MCP Tool functionality is now live! Look for the @McpTools annotated methods.
 
-The following Readme has been generated using an AI tool. I have added some personal tidbits for help.
+**Example screenshots:**
+<p>
+  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example.png" height="600" alt="MCP_Example"/>
+  <img style="border:1px solid black;" src="./src/main/resources/static/MCP_Example_2.png" height="600" alt="MCP_Example_2"/>
+</p>
+
 ## Prerequisites
 Before you start, make sure you have:
 - **Java 25** (matches this project's toolchain)
@@ -15,10 +18,9 @@ Before you start, make sure you have:
 - **Postman** (optional, but recommended) — a Postman collection/environment is included under `.postman/` and `postman/` to make testing easier.
 
 You do **not** need Gradle installed separately — this repo includes the Gradle wrapper (`gradlew` / `gradlew.bat`), which downloads the correct Gradle version automatically.
-
 ## 1. Clone the repository
 ```bash
-git clone git@github.com:anirmasharudh/payments-and-weather.git
+git clone git@github.com:anirmasharudh/weather-rest-mcp.git
 cd payments-and-weather
 ```
 (If you haven't set up SSH with GitHub, use the HTTPS URL instead — see GitHub's docs on Personal Access Tokens for authentication.)
@@ -67,7 +69,7 @@ openweathermap.api-key=<your-openweathermap-api-key>
 ```bash
 ./gradlew bootRun
 ```
-Or, from IntelliJ: run the `PaymentsApplication` main class directly.
+Or, from IntelliJ: run the `Application` main class directly.
 The app starts on **http://localhost:8080** by default.
 
 ## 6. Get an auth token and call the API
