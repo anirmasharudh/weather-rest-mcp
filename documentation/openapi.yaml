@@ -1,0 +1,192 @@
+openapi: 3.0.3
+
+info:
+  title: Weather & Payments API
+  description: |
+    REST API for the weather-rest-mcp project.
+
+    The application exposes weather information backed by OpenWeatherMap,
+    along with CRUD-style payment operations. REST endpoints are secured
+    with JWT bearer authentication.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+tags:
+  - name: Weather
+    description: Weather information
+  - name: Payments
+    description: Payment operations
+
+paths:
+  /weather/{your-name}/{your-city}:
+    get:
+      tags:
+        - Weather
+      summary: Get current weather for a city
+      description: |
+        Retrieves the current weather for the supplied city and returns a
+        human-readable response containing the condition, temperature,
+        feels-like temperature, and humidity.
+      operationId: getWeather
+      parameters:
+        - name: your-name
+          in: path
+          required: true
+          description: Name used in the response message
+          schema:
+            type: string
+          example: Anirudh
+        - name: your-city
+          in: path
+          required: true
+          description: City for which weather information is requested
+          schema:
+            type: string
+          example: New York
+      responses:
+        '200':
+          description: Current weather retrieved successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |
+                Thanks for calling my fake API, Anirudh! Here is how it looks in your town New York:
+                Condition: clear sky
+                Temp: 24.5 °C
+                Feels like: 24.1 °C
+                Humidity: 52%
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '5XX':
+          description: Weather service unavailable
+
+  /payment/id/{paymentId}:
+    get:
+      tags:
+        - Payments
+      summary: Fetch a payment by ID
+      operationId: getPaymentById
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          description: Unique payment identifier
+          schema:
+            type: integer
+            format: int64
+          example: 1001
+      responses:
+        '200':
+          description: Payment found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentDto'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Payment not found
+
+  /payments:
+    get:
+      tags:
+        - Payments
+      summary: Fetch all payments
+      operationId: getPayments
+      responses:
+        '200':
+          description: Payments retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentDto'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - Payments
+      summary: Create or update a payment
+      description: |
+        Saves a payment. If a payment ID is supplied, the persistence layer
+        may update the corresponding record; otherwise a new payment can be
+        created depending on the database configuration.
+      operationId: createOrUpdatePayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentDto'
+            example:
+              paymentId: 1001
+              clientId: CLIENT-001
+              amount: 125.50
+              status: PENDING
+              publishedAt: 2026-08-18T20:00:00
+      responses:
+        '200':
+          description: Payment successfully saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentDto'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT access token issued by the configured OAuth2/OIDC provider.
+
+  schemas:
+    PaymentDto:
+      type: object
+      properties:
+        paymentId:
+          type: integer
+          format: int64
+          description: Unique payment identifier
+          example: 1001
+        clientId:
+          type: string
+          description: Client associated with the payment
+          example: CLIENT-001
+        amount:
+          type: number
+          format: double
+          description: Payment amount
+          example: 125.50
+        status:
+          type: string
+          description: Current payment status
+          enum:
+            - COMPLETED
+            - PENDING
+            - FAILED
+          example: PENDING
+        publishedAt:
+          type: string
+          format: date-time
+          description: Time at which the payment was published
+          example: 2026-08-18T20:00:00
+      required:
+        - clientId
+        - amount
+        - status
+
+  responses:
+    Unauthorized:
+      description: Authentication is required or the supplied JWT is invalid.
+
+security:
+  - bearerAuth: []
