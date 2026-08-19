@@ -11,22 +11,23 @@
   <img src="./src/main/resources/static/MCP_Example.png" alt="MCP_Example"/>
 </p>
 
-Weather & Payments API
-│
-├── REST API
-│   ├── Weather
-│   │   └── GET /weather/{your-name}/{your-city}
-│   │
-│   └── Payments
-│       ├── GET  /payment/id/{paymentId}
-│       ├── GET  /payments
-│       └── POST /payments
-│
-├── MCP
-│   └── getTemperature(city)
-│
-└── Authentication
-    └── Keycloak / JWT
+## API Overview
+This project exposes a REST API for weather and payment operations, along with an MCP tool for querying weather data.
+
+### REST Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/weather/{name}/{city}` | Get current weather for a city |
+| `GET` | `/payment/id/{paymentId}` | Fetch a payment by ID |
+| `GET` | `/payments` | Fetch all payments |
+| `POST` | `/payments` | Create or update a payment |
+
+### MCP Tool
+`getTemperature(city)` retrieves the current temperature for a given city.
+
+### Authentication
+The API is secured using **JWT authentication with Keycloak**.
 
 ## Prerequisites
 Before you start, make sure you have:
@@ -109,18 +110,6 @@ curl http://localhost:8080/payments/{example} \
 ```
 Tokens expire quickly by default in Keycloak's dev mode (a few minutes) — if you get a 401 after some time, just request a new token.
 Alternatively, import the Postman collection/environment from `.postman/` or `postman/` and use Postman's **Bearer Token** auth tab with the copied token.
-
-## Project structure (high level)
-```
-src/main/java/com/anirudh/payments/
-├── config/       # Security, Jwt, and other bean configuration
-├── controller/    # REST controllers
-├── dto/          # Request/response DTOs
-├── entity/       # JPA entities
-├── filter/       # JwtAuthenticationFilter, OpaAuthorizationFilter
-├── repository/   # Spring Data JPA repositories
-└── service/      # Business logic, including WeatherService (OpenWeatherMap integration)
-```
 
 ## Troubleshooting
 - **`Cannot connect to the Docker daemon`** — Docker Desktop isn't running. Launch it and wait for the whale icon in the menu bar to settle before retrying.
