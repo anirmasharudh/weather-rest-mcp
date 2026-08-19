@@ -1,13 +1,11 @@
 package com.anirudh.payments.controller;
 
-import com.anirudh.payments.dto.PaymentResponse;
+import com.anirudh.payments.dto.PaymentDto;
 import com.anirudh.payments.service.PaymentService;
 import com.anirudh.payments.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,9 +39,20 @@ public class Controller {
     }
 
     @GetMapping("/payment/id/{paymentId}")
-    ResponseEntity<PaymentResponse> getPaymentById(@PathVariable Long paymentId) {
+    ResponseEntity<PaymentDto> getPaymentById(@PathVariable Long paymentId) {
         return paymentService.getPayment(paymentId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/payments")
+    ResponseEntity<List<PaymentDto>> getPayments() {
+        return ResponseEntity.ok(paymentService.getPayments());
+    }
+
+    @PostMapping("/payments")
+    ResponseEntity<PaymentDto> createOrUpdatePayment(@RequestBody PaymentDto paymentDto) {
+        PaymentDto saved = paymentService.saveOrUpdatePayment(paymentDto);
+        return ResponseEntity.ok(saved);
     }
 }
