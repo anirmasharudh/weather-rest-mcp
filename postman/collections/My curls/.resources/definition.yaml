@@ -1,6 +1,0 @@
-$kind: collection
-name: My curls
-variables:
-  - key: supabase_service_role_api_key_045x
-    secret: true
-    disabled: false
