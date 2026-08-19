@@ -11,6 +11,23 @@
   <img src="./src/main/resources/static/MCP_Example.png" alt="MCP_Example"/>
 </p>
 
+Weather & Payments API
+│
+├── REST API
+│   ├── Weather
+│   │   └── GET /weather/{your-name}/{your-city}
+│   │
+│   └── Payments
+│       ├── GET  /payment/id/{paymentId}
+│       ├── GET  /payments
+│       └── POST /payments
+│
+├── MCP
+│   └── getTemperature(city)
+│
+└── Authentication
+    └── Keycloak / JWT
+
 ## Prerequisites
 Before you start, make sure you have:
 - **Java 25** (matches this project's toolchain)
