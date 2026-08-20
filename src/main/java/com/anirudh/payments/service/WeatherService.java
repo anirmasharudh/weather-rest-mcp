@@ -22,20 +22,7 @@ public class WeatherService {
         this.apiKey = apiKey;
     }
 
-    // MCP tool
-    @McpTool(description = "Gets the current temperature in Celsius for a given city",
-            annotations = @McpTool.McpAnnotations(readOnlyHint = true, destructiveHint = false, idempotentHint = true))
-    public String getTemperature(@McpToolParam(description = "City name, e.g. 'London'") String city) {
-        log.info("Getting temperature for City {} from the MCP tool", city);
-        WeatherResponse response = fetchWeatherResponse(city);
-
-        if (response == null || response.main() == null) {
-            return "Could not retrieve weather for " + city;
-        }
-        return "Current temperature in " + city + " is " + response.main().temp() + "°C";
-    }
-
-    // Rest Endpoint
+    // Rest method
     public List<String> getCurrentWeather(String city) {
         log.info("Getting weather conditions for City {} from the Rest endpoint", city);
         WeatherResponse response = fetchWeatherResponse(city);
@@ -49,6 +36,19 @@ public class WeatherService {
                 String.valueOf(response.main.feelsLike()),
                 String.valueOf(response.main.humidity())
         );
+    }
+
+    // MCP tool
+    @McpTool(description = "Gets the current temperature in Celsius for a given city",
+            annotations = @McpTool.McpAnnotations(readOnlyHint = true, destructiveHint = false, idempotentHint = true))
+    public String getTemperature(@McpToolParam(description = "City name, e.g. 'London'") String city) {
+        log.info("Getting temperature for City {} from the MCP tool", city);
+        WeatherResponse response = fetchWeatherResponse(city);
+
+        if (response == null || response.main() == null) {
+            return "Could not retrieve weather for " + city;
+        }
+        return "Current temperature in " + city + " is " + response.main().temp() + "°C";
     }
 
     // Helpers
