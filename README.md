@@ -4,7 +4,7 @@
 ![This weather](./src/main/resources/static/IMG_1361.png)
 
 ## MCP Tool functionality is now live! 
-**Look for the @McpTools annotated methods.**
+**Look for the `@McpTool`-annotated methods.**
 
 **Example screenshots:**
 <p>
@@ -12,22 +12,23 @@
 </p>
 
 ## API Overview
-This project exposes a REST API for weather and payment operations, along with an MCP tool for querying weather data.
+This project exposes a REST API for weather and payment operations, along with MCP tools for querying weather data and managing payments.
 
 ### REST Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/weather/{name}/{city}` | Get current weather for a city |
-| `GET` | `/payment/id/{paymentId}` | Fetch a payment by ID |
-| `GET` | `/payments` | Fetch all payments |
+| `GET` | `/payments/lookup/{paymentId}` | Fetch a payment by ID |
 | `POST` | `/payments` | Create or update a payment |
 
-### MCP Tool
-`getTemperature(city)` retrieves the current temperature for a given city.
+### MCP Tools
+- `getTemperature(city)` — retrieves the current temperature for a given city.
+- `getPaymentTool(paymentId)` — retrieves a payment record by ID.
+- `createOrUpdatePaymentTool(paymentId, clientId, amount, status)` — creates or updates a payment record.
 
 ### Authentication
-The API is secured using **JWT authentication with Keycloak**.
+The API is secured using **JWT authentication with Keycloak**, with route/role-level authorization enforced via **OPA**.
 
 ## Prerequisites
 Before you start, make sure you have:
@@ -37,10 +38,11 @@ Before you start, make sure you have:
 - **Postman** (optional, but recommended) — a Postman collection/environment is included under `.postman/` and `postman/` to make testing easier.
 
 You do **not** need Gradle installed separately — this repo includes the Gradle wrapper (`gradlew` / `gradlew.bat`), which downloads the correct Gradle version automatically.
+
 ## 1. Clone the repository
 ```bash
 git clone git@github.com:anirmasharudh/weather-rest-mcp.git
-cd payments-and-weather
+cd weather-rest-mcp
 ```
 (If you haven't set up SSH with GitHub, use the HTTPS URL instead — see GitHub's docs on Personal Access Tokens for authentication.)
 
@@ -54,6 +56,7 @@ Verify everything started correctly:
 docker compose ps
 ```
 All services should show as `running` (or `healthy` if a healthcheck is defined).
+
 > **First-time run note:** Docker needs to download each image the first time — this can take a couple of minutes depending on your connection. Subsequent runs will be much faster.
 
 ## 3. Set up Keycloak (authentication)
@@ -103,13 +106,22 @@ curl -X POST http://localhost:9000/realms/payments-dev/protocol/openid-connect/t
   -d "password=<your-test-user-password>"
 ```
 Copy the `access_token` value from the response.
+
 **Call a protected endpoint:**
 ```bash
-curl http://localhost:8080/payments/{example} \
+curl http://localhost:8080/weather/Ani/Jammu \
   -H "Authorization: Bearer <access_token>"
 ```
 Tokens expire quickly by default in Keycloak's dev mode (a few minutes) — if you get a 401 after some time, just request a new token.
+
 Alternatively, import the Postman collection/environment from `.postman/` or `postman/` and use Postman's **Bearer Token** auth tab with the copied token.
+
+## Calling the MCP tools
+This server exposes its tools over Streamable HTTP at `POST/GET http://localhost:8080/mcp`. It can be reached by:
+- **MCP Inspector** — connect via Streamable HTTP, add your bearer token under Custom Headers.
+- **Claude Desktop** — via the `mcp-remote` bridge, with a static `Authorization` header pointing at a valid access token.
+
+See the project's other companion repo for a minimal standalone MCP *client* demo (no chat UI, just deterministic command-to-tool dispatch with console logging).
 
 ## Troubleshooting
 - **`Cannot connect to the Docker daemon`** — Docker Desktop isn't running. Launch it and wait for the whale icon in the menu bar to settle before retrying.
